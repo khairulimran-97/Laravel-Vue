@@ -69,6 +69,9 @@
                                 </div>
                             </div>
                         </th>
+                        <th class="px-6 py-3 bg-gray-50 text-left">
+                            <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Actions</span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 divide-solid">
@@ -88,6 +91,10 @@
                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                             {{ post.created_at }}
                         </td>
+                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                            <router-link :to="{ name: 'posts.edit', params: { id: post.id } }">Edit</router-link>
+                            <a href="#" @click.prevent="deletePost(post.id)" class="ml-2">Delete</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -106,7 +113,7 @@ import useCategories from "@/composables/categories";
 const selectedCategory = ref('')
 const orderColumn = ref('created_at')
 const orderDirection = ref('desc')
-const { posts, getPosts } = usePosts()
+const { posts, getPosts, deletePost } = usePosts()
 const { categories, getCategories } = useCategories()
 
 const updateOrdering = (column) => {
